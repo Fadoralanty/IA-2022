@@ -10,6 +10,11 @@ public class EnemyController : Entity
     private void Start()
     {
         _damageable = GetComponent<Damageable>();
+        _damageable.OnDie.AddListener(OnDieListener);
     }
-    
+
+    private void OnDieListener()
+    {
+        gameObject.SetActive(false);
+    }
 }
