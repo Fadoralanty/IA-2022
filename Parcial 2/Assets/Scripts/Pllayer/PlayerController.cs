@@ -11,11 +11,17 @@ public class PlayerController : Entity
     [SerializeField] private bool _isGrounded;
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private Transform _orientation;
-
+    [SerializeField] private Damageable _damageable;
     protected  override void Awake()
     {
         base.Awake();
         speed = _moveSpeeed;
+    }
+
+    private void Start()
+    {
+        _damageable = GetComponent<Damageable>();
+        _damageable.OnDie.AddListener(OnDieListener);
     }
 
     private void Update()
@@ -33,6 +39,11 @@ public class PlayerController : Entity
         {
             speed = _moveSpeeed;
         }
+    }
+
+    private void OnDieListener()
+    {
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
