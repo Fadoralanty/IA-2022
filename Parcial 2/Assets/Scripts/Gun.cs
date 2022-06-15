@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class Gun : MonoBehaviour
 {
@@ -11,13 +12,14 @@ public class Gun : MonoBehaviour
     private Collider _gunCollider;
     [SerializeField]private float _damage = 10f;
     public float _fireRate = 0.5f;
+    public float _knockback = 10;
     private float _currentTime;
     public float _range = 100f;
     private Camera _fpsCam;
     [SerializeField] private LayerMask _gunLayer;
-    [SerializeField] private ParticleSystem _muzzleFlash;
+    [SerializeField] private GameObject _muzzleFlash;
     [SerializeField] private GameObject _impactEffect;
-    
+    [SerializeField] private Animator _animator;
     private void Awake()
     {
         _gunCollider = GetComponent<Collider>();
@@ -27,27 +29,29 @@ public class Gun : MonoBehaviour
     private void Start()
     {
         _fpsCam = Camera.main;
-        _muzzleFlash = GetComponentInChildren<ParticleSystem>();
         _currentTime = 0f;
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         _currentTime += Time.deltaTime;
-        if (_currentTime>=_fireRate)
+        if (_currentTime >= _fireRate)
         {
-            _muzzleFlash.Stop();
+            _muzzleFlash.SetActive(false);
             if (Input.GetButtonDown("Fire1"))
             {
                 Shoot();
+                _currentTime = 0;
             }
         }
+        
     }
 
     private void Shoot()
     {
-
-        _muzzleFlash.Play();
+        _animator.SetTrigger("Shoot");
+        _muzzleFlash.SetActive(true);
         RaycastHit hit;
         bool isHit = Physics.Raycast(_fpsCam.transform.position, _fpsCam.transform.forward, out hit, _range,_gunLayer);
         if (isHit)
@@ -57,6 +61,11 @@ public class Gun : MonoBehaviour
             {
                 target.TakeDamage(_damage);
             }
+
+            // if (hit.rigidbody)
+            // {
+            //     hit.rigidbody.AddForce(-hit.normal*_knockback, ForceMode.Impulse);
+            // }
 
             GameObject impactGO =Instantiate(_impactEffect, hit.point, Quaternion.FromToRotation(Vector3.forward , hit.normal));
         }

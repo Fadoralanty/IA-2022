@@ -402,6 +402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_MuzzleFlash_9
       objectReference: {fileID: 0}
+    - target: {fileID: 1878562931533808, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4953322685607292, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -444,10 +448,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198073866985245600, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198129511869858876, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198176989825005876, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
+      propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198176989825005876, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
@@ -456,7 +464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198176989825005876, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198176989825005876, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: LightsModule.enabled
@@ -464,23 +472,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198177447594893044, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198309029580556402, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198391626299374470, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198435360230862572, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198776290977613192, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199386128496396028, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
       propertyPath: m_Materials.Array.size
@@ -524,6 +532,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 963194228}
     m_Modifications:
+    - target: {fileID: 1754244891, guid: 2ac42b41a0705614d90e3c0c06c43a31, type: 3}
+      propertyPath: _fireRate
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754244891, guid: 2ac42b41a0705614d90e3c0c06c43a31, type: 3}
+      propertyPath: _knockback
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754244891, guid: 2ac42b41a0705614d90e3c0c06c43a31, type: 3}
+      propertyPath: _muzzleFlash
+      value: 
+      objectReference: {fileID: 1048990151}
     - target: {fileID: 1754244891, guid: 2ac42b41a0705614d90e3c0c06c43a31, type: 3}
       propertyPath: _impactEffect
       value: 
@@ -719,6 +739,11 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1048990151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1878562931533808, guid: 106c742177ad6604ba3c7a1bc3fa768f, type: 3}
+  m_PrefabInstance: {fileID: 917026232}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1064182184
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,6 +915,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1218252720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2846838504209711615, guid: 2ac42b41a0705614d90e3c0c06c43a31, type: 3}
+  m_PrefabInstance: {fileID: 920157612}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1218252724
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218252720}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 021e50224853807439a0e01040a30aa1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1507844700
 GameObject:
   m_ObjectHideFlags: 0
