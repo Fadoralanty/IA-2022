@@ -14,24 +14,21 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     List<Vector3> _path;
     int _index;
     float _minDistance = 0.5f;
+    private float TargetRange = 1f;
     
-    public GoToLastTargetSeenPosition(EnemyModel enemyModel, Transform target, INode root, Vector3 lastSeenPos, 
-        ISteering obsAvoidance,LayerMask maskObs, Astar<Vector3> ast, List<Vector3> path, int index, float minDistance)
+    public GoToLastTargetSeenPosition(EnemyModel enemyModel, Transform target, INode root, ISteering obsAvoidance,
+        LayerMask maskObs)
     {
         _enemyModel = enemyModel;
         _target = target;
         _root = root;
-        _lastSeenPos = lastSeenPos;
         _obsAvoidance = obsAvoidance;
         _maskObs = maskObs;
-        _ast = ast;
-        _path = path;
-        _index = index;
-        _minDistance = minDistance;
     }
 
     public override void Init()
     {
+        _lastSeenPos = EnemyManager.instance.PlayerlastSeenPosition;
         base.Init();
         SetPath();
     }
@@ -45,6 +42,8 @@ public class GoToLastTargetSeenPosition<T> : State<T>
         }
         if (_enemyModel.LineOfSight(_target))
         {
+            EnemyManager.instance.PlayerlastSeenPosition = _target.position;
+            EnemyManager.instance.PlayerWasSeen=true;
             _root.Execute();
             return;
         }
@@ -68,6 +67,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
         }
         if (_index >= _path.Count)
         {
+            EnemyManager.instance.PlayerWasSeen = false;
             _root.Execute();
             return;
         }
@@ -117,6 +117,6 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     private bool IsSatisfied(Vector3 curr)
     {
         float distance = Vector3.Distance(curr, _lastSeenPos);
-        return distance <= _minDistance;
+        return distance <= TargetRange;
     }
 }

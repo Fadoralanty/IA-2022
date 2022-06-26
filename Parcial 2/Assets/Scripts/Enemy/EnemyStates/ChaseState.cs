@@ -34,6 +34,7 @@ public class ChaseState<T> : State<T>
         _enemy.Move(_enemy.transform.forward);
         if (!_enemy.LineOfSight(_target))
         {
+            EnemyManager.instance.PlayerlastSeenPosition = _target.position;
             _root.Execute();
         }
         

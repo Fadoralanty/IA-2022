@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public static EnemyManager instance;
     public bool PlayerWasSeen;
     public Vector3 PlayerlastSeenPosition = Vector3.zero;
-
-    public void SetLastSeenPosition(Vector3 Position)
+    
+    private void Awake()
     {
-        PlayerlastSeenPosition = Position;
+        if (instance==null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
+
 }

@@ -21,7 +21,8 @@ public class EnemyController : MonoBehaviour
     enum States
     {
         idle,
-        Chase
+        Chase,
+        GoToLastSeenPos
     }
 
     private FSM<States> _fsm;
@@ -56,10 +57,16 @@ public class EnemyController : MonoBehaviour
         _fsm = new FSM<States>();
         _idleState = new IdleState<States>(_enemyModel, target, waitTime, _root);
         ChaseState<States> chaseState = new ChaseState<States>(_root, _enemyModel, target, seek, obsAvoidance);
+        GoToLastTargetSeenPosition<States> goToLastSeenPos = new GoToLastTargetSeenPosition<States>(_enemyModel, target, _root, obsAvoidance, obsMask);
         
         _idleState.AddTransition(States.Chase,chaseState);
-        
+        _idleState.AddTransition(States.GoToLastSeenPos,goToLastSeenPos);
+
+        goToLastSeenPos.AddTransition(States.idle, _idleState);
+        goToLastSeenPos.AddTransition(States.Chase, chaseState);
+
         chaseState.AddTransition(States.idle,_idleState);
+        chaseState.AddTransition(States.GoToLastSeenPos,goToLastSeenPos);
         
         _fsm.SetInit(_idleState);
     }
@@ -68,14 +75,21 @@ public class EnemyController : MonoBehaviour
     {
         ActionNode idle = new ActionNode(() => _fsm.Transition(States.idle));
         ActionNode chase = new ActionNode(() => _fsm.Transition(States.Chase));
+        ActionNode goToLastSeen = new ActionNode(() => _fsm.Transition(States.GoToLastSeenPos));
 
-        QuestionNode inSight = new QuestionNode(InSight, chase, idle);
+        QuestionNode wasSeen = new QuestionNode(WasSeen, goToLastSeen, idle);
+        QuestionNode inSight = new QuestionNode(InSight, chase, wasSeen);
+        
 
         _root = inSight;
     }
     bool InSight()
     {
         return _enemyModel.LineOfSight(target);
+    }    
+    bool WasSeen()
+    {
+        return EnemyManager.instance.PlayerWasSeen;
     }
     private void OnDieListener()
     {

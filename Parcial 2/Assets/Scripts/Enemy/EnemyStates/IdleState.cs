@@ -22,7 +22,16 @@ public class IdleState<T> : CooldownState<T>
         base.Execute();
         if (_enemyModel.LineOfSight(_target))
         {
+            EnemyManager.instance.PlayerWasSeen = true;
+            EnemyManager.instance.PlayerlastSeenPosition = _target.position;
             _root.Execute();
+            return;
+        }
+
+        if (EnemyManager.instance.PlayerWasSeen)
+        {
+            _root.Execute();
+            return;
         }
     }
 }
