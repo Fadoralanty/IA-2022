@@ -82,7 +82,9 @@ public class EnemyModel : Entity
         player = collision.collider.GetComponent<PlayerController>();
         if (player)
         {
+            
             player.Damageable.TakeDamage(_damage);
+            //player._rb.AddForce(transform.forward * 100, ForceMode.Impulse);
             _hasDamaged = true;
         }
 
@@ -91,6 +93,7 @@ public class EnemyModel : Entity
         if (playerGun)
         {
             GameManager.instance.Player.Damageable.TakeDamage(_damage);
+            //GameManager.instance.Player._rb.AddForce(transform.forward * 100, ForceMode.Impulse);
             _hasDamaged = true;
         }
     }
