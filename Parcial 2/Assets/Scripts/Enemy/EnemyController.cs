@@ -30,7 +30,6 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.instance.enemies.Add(gameObject);
         _damageable = GetComponent<Damageable>();
         _enemyModel = GetComponent<EnemyModel>();
         _damageable.OnDie.AddListener(OnDieListener);
@@ -38,6 +37,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.enemies.Add(gameObject);
         target = GameManager.instance.Player.transform;
         InitializedTree();
         InitializedFSM();
