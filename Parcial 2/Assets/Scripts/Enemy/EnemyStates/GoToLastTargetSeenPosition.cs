@@ -19,6 +19,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     public GoToLastTargetSeenPosition(EnemyModel enemyModel, Transform target, INode root, ISteering obsAvoidance,
         LayerMask maskObs)
     {
+        _ast = new Astar<Vector3>();
         _enemyModel = enemyModel;
         _target = target;
         _root = root;
@@ -43,7 +44,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
         if (_enemyModel.LineOfSight(_target))
         {
             EnemyManager.instance.PlayerlastSeenPosition = _target.position;
-            EnemyManager.instance.PlayerWasSeen=true;
+            EnemyManager.instance.PlayerWasSeen = true;
             _root.Execute();
             return;
         }
