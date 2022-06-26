@@ -17,7 +17,7 @@ public class Gun : MonoBehaviour
     public float _range = 100f;
     private Camera _fpsCam;
     [SerializeField] private LayerMask _gunLayer;
-    [SerializeField] private GameObject _muzzleFlash;
+    [SerializeField] private ParticleSystem _muzzleFlash;
     [SerializeField] private GameObject _impactEffect;
     [SerializeField] private Animator _animator;
     private void Awake()
@@ -38,7 +38,6 @@ public class Gun : MonoBehaviour
         _currentTime += Time.deltaTime;
         if (_currentTime >= _fireRate)
         {
-            _muzzleFlash.SetActive(false);
             if (Input.GetButtonDown("Fire1"))
             {
                 Shoot();
@@ -51,7 +50,7 @@ public class Gun : MonoBehaviour
     private void Shoot()
     {
         _animator.SetTrigger("Shoot");
-        _muzzleFlash.SetActive(true);
+        _muzzleFlash.Play();
         RaycastHit hit;
         bool isHit = Physics.Raycast(_fpsCam.transform.position, _fpsCam.transform.forward, out hit, _range,_gunLayer);
         if (isHit)
@@ -62,10 +61,10 @@ public class Gun : MonoBehaviour
                 target.TakeDamage(_damage);
             }
 
-            // if (hit.rigidbody)
-            // {
-            //     hit.rigidbody.AddForce(-hit.normal*_knockback, ForceMode.Impulse);
-            // }
+            if (hit.rigidbody)
+            {
+                hit.rigidbody.AddForce(-hit.normal*_knockback, ForceMode.Impulse);
+            }
 
             GameObject impactGO =Instantiate(_impactEffect, hit.point, Quaternion.FromToRotation(Vector3.forward , hit.normal));
         }

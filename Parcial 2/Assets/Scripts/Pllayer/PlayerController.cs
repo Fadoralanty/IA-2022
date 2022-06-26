@@ -11,6 +11,8 @@ public class PlayerController : Entity
     [SerializeField] private bool _isGrounded;
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private Transform _orientation;
+    [SerializeField] private GameObject Gun;
+    public Damageable Damageable => _damageable;
     [SerializeField] private Damageable _damageable;
     protected  override void Awake()
     {
@@ -44,6 +46,8 @@ public class PlayerController : Entity
     private void OnDieListener()
     {
         gameObject.SetActive(false);
+        Gun.SetActive(false);
+        GameManager.instance.GameOver();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -53,5 +57,6 @@ public class PlayerController : Entity
             _isGrounded = true;
         }
     }
+    
     
 }
