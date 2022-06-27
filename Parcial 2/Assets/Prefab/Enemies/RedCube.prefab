@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentLife: 0
-  _maxLife: 100
+  _maxLife: 50
   _isInvulnerable: 0
   OnDie:
     m_PersistentCalls:

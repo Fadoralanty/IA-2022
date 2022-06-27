@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private float _loseHealthSpeedOneShot= 2f;
 
     [Header("Life Components")]
-    [SerializeField] private Damageable _damageable;
+    public Damageable _damageable;
 
 
     private void Awake()
@@ -23,6 +24,10 @@ public class HealthBar : MonoBehaviour
         _damageable.OnLifeUpdate += FillHealthbar;
     }
 
+    private void Start()
+    {
+        
+    }
 
     private void Update()
     {

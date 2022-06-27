@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentLife: 0
-  _maxLife: 100
+  _maxLife: 30
   _isInvulnerable: 0
   OnDie:
     m_PersistentCalls:
@@ -171,6 +171,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   obsRange: 1.52
-  obsAngle: 200
+  obsAngle: 300
   waitTime: 2
   randomAngle: 90

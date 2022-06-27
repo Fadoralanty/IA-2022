@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,11 @@ public class MainMenu : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadScene("Julian");
+        SceneManager.LoadScene("Level 1");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene("Level 1"); ;
     }
 }

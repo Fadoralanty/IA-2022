@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public PlayerController Player;
     public List<GameObject> enemies;
+    private bool _isGameFinished;
     [Header("Score")]
     public Action<float> OnScoreChange;
     public float currentScore = 0f;
@@ -22,7 +23,8 @@ public class GameManager : MonoBehaviour
     public float currentGameTime=0f;
     public float MaxLevelGameTime = 9999f;
     public UnityEvent OnLevelReset = new UnityEvent();
-
+    public string NextLevel;
+        
     [SerializeField] private GameObject HUD;    
     [SerializeField] private GameObject GameOverScreen;     
     [SerializeField] private GameObject Victory_Screen;
@@ -33,15 +35,13 @@ public class GameManager : MonoBehaviour
     {
         currentGameTime = MaxLevelGameTime;
         currentLevel = SceneManager.GetActiveScene().name;
-        DontDestroyOnLoad(gameObject);
         OnScoreChange?.Invoke(currentScore);
         OnMultiplierChange?.Invoke(scoreMultiplier);
-        GameOverScreen.SetActive(false);
-        Victory_Screen.SetActive(false);
     }
     
     private void Awake()
     {
+        Player = GameObject.Find("Player").GetComponent<PlayerController>();
         if (instance==null)
         {
             instance = this;
@@ -69,16 +69,29 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        GameOverScreen.SetActive(true);
+        StartCoroutine(LoadMainMenu());
+    }
+
+    IEnumerator LoadMainMenu()
+    {
+        Instantiate(GameOverScreen);
         HUD.SetActive(false);
         Player.gameObject.SetActive(false);
-        //play death animation
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void GameCompleted() //llamar al matar a un boss
     {
-        Victory_Screen.SetActive(true);
-        //play victory animations
+        StartCoroutine(LoadNextLevel(NextLevel));
+    }
+    IEnumerator LoadNextLevel(string levelName)
+    {
+        Instantiate(Victory_Screen);
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(levelName);
+        currentLevel = levelName;
+        ResetLevelValues();
     }
     public void AddScore(float points)
     {
@@ -111,10 +124,5 @@ public class GameManager : MonoBehaviour
         OnLevelReset.Invoke();
     }
 
-    public void LoadNextLevel(string levelName)
-    {
-        SceneManager.LoadScene(levelName);
-        currentLevel = levelName;
-        ResetLevelValues();
-    }
+
 }
