@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   _rb: {fileID: 0}
-  rangeSight: 10
+  rangeSight: 12
   angleSight: 200
   maskObstacles:
     serializedVersion: 2

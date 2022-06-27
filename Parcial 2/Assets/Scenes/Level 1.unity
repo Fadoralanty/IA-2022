@@ -1569,10 +1569,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedCube (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 5414637441794715551, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
 --- !u!1 &1168053941
@@ -3061,7 +3057,7 @@ MonoBehaviour:
   currentScore: 0
   scoreMultiplier: 1
   currentGameTime: 0
-  MaxLevelGameTime: 180
+  MaxLevelGameTime: 45
   OnLevelReset:
     m_PersistentCalls:
       m_Calls: []

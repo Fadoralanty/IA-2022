@@ -69,12 +69,17 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        _isGameFinished = true;
         StartCoroutine(LoadMainMenu());
     }
 
     IEnumerator LoadMainMenu()
     {
-        Instantiate(GameOverScreen);
+        if (_isGameFinished)
+        {
+            Instantiate(GameOverScreen);
+            _isGameFinished = false;
+        }
         HUD.SetActive(false);
         Player.gameObject.SetActive(false);
         yield return new WaitForSeconds(3f);
@@ -83,11 +88,17 @@ public class GameManager : MonoBehaviour
 
     public void GameCompleted() //llamar al matar a un boss
     {
+        _isGameFinished = true;
         StartCoroutine(LoadNextLevel(NextLevel));
     }
     IEnumerator LoadNextLevel(string levelName)
     {
-        Instantiate(Victory_Screen);
+        if (_isGameFinished)
+        {
+            Instantiate(Victory_Screen);
+            _isGameFinished = false;
+        }
+
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(levelName);
         currentLevel = levelName;

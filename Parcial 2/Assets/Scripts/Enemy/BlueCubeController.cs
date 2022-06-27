@@ -19,7 +19,8 @@ public class BlueCubeController : MonoBehaviour
     enum States
     {
         idle,
-        Flee
+        Flee,
+        Wander
     }
     
     private FSM<States> _fsm;
@@ -56,22 +57,33 @@ public class BlueCubeController : MonoBehaviour
         _fsm = new FSM<States>();
         _idleState = new BlueIdle<States>(_blueCubeModel, target, waitTime, _root);
         FleeState<States> fleeState = new FleeState<States>(_root, _blueCubeModel, target, flee, obsAvoidance);
-        
+        WanderingState<States> wanderState = new WanderingState<States>(_blueCubeModel, target, obsAvoidance, randomAngle, waitTime, _root);
+
         _idleState.AddTransition(States.Flee,fleeState);
+        _idleState.AddTransition(States.Wander,wanderState);
         
+        wanderState.AddTransition(States.idle,_idleState);
+        wanderState.AddTransition(States.Flee,fleeState);
 
         fleeState.AddTransition(States.idle,_idleState);
+        fleeState.AddTransition(States.Wander,wanderState);
         
-        _fsm.SetInit(_idleState);
+        _fsm.SetInit(wanderState);
     }
     private void InitializedTree()
     {
         ActionNode idle = new ActionNode(() => _fsm.Transition(States.idle));
         ActionNode flee = new ActionNode(() => _fsm.Transition(States.Flee));
-
-        QuestionNode inSight = new QuestionNode(InSight, flee, idle);
+        ActionNode wander = new ActionNode(() => _fsm.Transition(States.Wander));
+        
+        QuestionNode isIdle = new QuestionNode(IsIdle, wander, idle);
+        QuestionNode inSight = new QuestionNode(InSight, flee, isIdle);
 
         _root = inSight;
+    }
+    bool IsIdle()
+    {
+        return _fsm.GetCurrentState == _idleState;
     }
     bool InSight()
     {

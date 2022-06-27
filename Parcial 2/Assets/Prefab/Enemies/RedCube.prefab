@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 5414637441794715551}
   - component: {fileID: 5414637441794715548}
   - component: {fileID: 4659998218569572092}
+  - component: {fileID: 1795560820785789056}
+  - component: {fileID: 273515166686339156}
   m_Layer: 9
   m_Name: RedCube
   m_TagString: Untagged
@@ -170,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c30ff869fbfbdd84d98a351341e480c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   _rb: {fileID: 0}
   rangeSight: 10
   angleSight: 200
@@ -180,6 +182,37 @@ MonoBehaviour:
   _damage: 15
   DamageDelay: 1
   CurrentTime: 0
+--- !u!114 &1795560820785789056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414637441794715542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0404083bcd827074fa53dfdde976977e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 2
+  capacity: 10
+  maskBoids:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &273515166686339156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414637441794715542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf09c319c9f777419f0dfa45649dc17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 2
+  _multiplier: 1
 --- !u!1001 &5414637442038129275
 PrefabInstance:
   m_ObjectHideFlags: 0
