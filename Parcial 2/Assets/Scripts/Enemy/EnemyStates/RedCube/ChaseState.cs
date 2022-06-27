@@ -6,15 +6,15 @@ public class ChaseState<T> : State<T>
 {
 
     INode _root;
-    EnemyModel _enemy;
+    RedCubeModel _redCube;
     Transform _target;
     ISteering _seek;
     ISteering _obsAvoidance;
     
-    public ChaseState(INode root, EnemyModel enemy, Transform target, ISteering seek, ISteering obsAvoidance)
+    public ChaseState(INode root, RedCubeModel redCube, Transform target, ISteering seek, ISteering obsAvoidance)
     {
         _root = root;
-        _enemy = enemy;
+        _redCube = redCube;
         _target = target;
         _seek = seek;
         _obsAvoidance = obsAvoidance;
@@ -30,9 +30,9 @@ public class ChaseState<T> : State<T>
     {
         base.Execute();
         Vector3 dir = _seek.GetDir() + _obsAvoidance.GetDir();
-        _enemy.LookDir(dir.normalized);
-        _enemy.Move(_enemy.transform.forward);
-        if (!_enemy.LineOfSight(_target))
+        _redCube.LookDir(dir.normalized);
+        _redCube.Move(_redCube.transform.forward);
+        if (!_redCube.LineOfSight(_target))
         {
             EnemyManager.instance.PlayerlastSeenPosition = _target.position;
             _root.Execute();

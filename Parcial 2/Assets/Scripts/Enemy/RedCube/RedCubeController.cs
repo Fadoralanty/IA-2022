@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class RedCubeController : MonoBehaviour
 {
     [SerializeField] private Damageable _damageable;
-    [SerializeField] private EnemyModel _enemyModel;
+    [SerializeField] private RedCubeModel redCubeModel;
 
     public Transform target;
     [Header("Obs Avoidance")]
@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         _damageable = GetComponent<Damageable>();
-        _enemyModel = GetComponent<EnemyModel>();
+        redCubeModel = GetComponent<RedCubeModel>();
         _damageable.OnDie.AddListener(OnDieListener);
     }
 
@@ -51,13 +51,13 @@ public class EnemyController : MonoBehaviour
 
     private void InitializedFSM()
     {
-        ISteering obsAvoidance = new ObstacleAvoidance(_enemyModel.transform, obsMask, obsRange, obsAngle);
-        ISteering seek = new Seek(_enemyModel.transform, target);
+        ISteering obsAvoidance = new ObstacleAvoidance(redCubeModel.transform, obsMask, obsRange, obsAngle);
+        ISteering seek = new Seek(redCubeModel.transform, target);
 
         _fsm = new FSM<States>();
-        _idleState = new IdleState<States>(_enemyModel, target, waitTime, _root);
-        ChaseState<States> chaseState = new ChaseState<States>(_root, _enemyModel, target, seek, obsAvoidance);
-        GoToLastTargetSeenPosition<States> goToLastSeenPos = new GoToLastTargetSeenPosition<States>(_enemyModel, target, _root, obsAvoidance, obsMask);
+        _idleState = new IdleState<States>(redCubeModel, target, waitTime, _root);
+        ChaseState<States> chaseState = new ChaseState<States>(_root, redCubeModel, target, seek, obsAvoidance);
+        GoToLastTargetSeenPosition<States> goToLastSeenPos = new GoToLastTargetSeenPosition<States>(redCubeModel, target, _root, obsAvoidance, obsMask);
         
         _idleState.AddTransition(States.Chase,chaseState);
         _idleState.AddTransition(States.GoToLastSeenPos,goToLastSeenPos);
@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour
     }
     bool InSight()
     {
-        return _enemyModel.LineOfSight(target);
+        return redCubeModel.LineOfSight(target);
     }    
     bool WasSeen()
     {

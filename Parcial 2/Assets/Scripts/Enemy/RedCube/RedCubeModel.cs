@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class EnemyModel : Entity
+public class RedCubeModel : Entity
 {
     public float rangeSight;
     public float angleSight;

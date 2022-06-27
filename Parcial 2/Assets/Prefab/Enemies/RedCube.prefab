@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5414637441794715548}
   - component: {fileID: 4659998218569572092}
   m_Layer: 9
-  m_Name: DefaultEnemy
+  m_Name: RedCube
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageable: {fileID: 5414637441794715548}
-  _enemyModel: {fileID: 0}
+  redCubeModel: {fileID: 0}
   target: {fileID: 0}
   obsMask:
     serializedVersion: 2
@@ -172,8 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   _rb: {fileID: 0}
-  rangeSight: 9
-  angleSight: 130
+  rangeSight: 10
+  angleSight: 200
   maskObstacles:
     serializedVersion: 2
     m_Bits: 1024
@@ -190,6 +190,26 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
       propertyPath: m_Name
       value: Knife (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6785
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6785
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.023715
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00003376
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
       propertyPath: m_RootOrder
@@ -268,6 +288,18 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
       propertyPath: m_Name
       value: Knife
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6785
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6785
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 22fab0243a5bbfe4ba2fca2006b6cd9c, type: 3}
       propertyPath: m_RootOrder

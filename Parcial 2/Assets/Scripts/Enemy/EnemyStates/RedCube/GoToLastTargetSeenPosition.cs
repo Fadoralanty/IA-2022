@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoToLastTargetSeenPosition<T> : State<T>
 {
-    EnemyModel _enemyModel;
+    RedCubeModel _redCubeModel;
     Transform _target;
     INode _root;
     Vector3 _lastSeenPos;
@@ -14,13 +14,13 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     List<Vector3> _path;
     int _index;
     float _minDistance = 0.5f;
-    private float TargetRange = 1f;
+    private float TargetRange = 2f;
     
-    public GoToLastTargetSeenPosition(EnemyModel enemyModel, Transform target, INode root, ISteering obsAvoidance,
+    public GoToLastTargetSeenPosition(RedCubeModel redCubeModel, Transform target, INode root, ISteering obsAvoidance,
         LayerMask maskObs)
     {
         _ast = new Astar<Vector3>();
-        _enemyModel = enemyModel;
+        _redCubeModel = redCubeModel;
         _target = target;
         _root = root;
         _obsAvoidance = obsAvoidance;
@@ -41,7 +41,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
             _root.Execute();
             return;
         }
-        if (_enemyModel.LineOfSight(_target))
+        if (_redCubeModel.LineOfSight(_target))
         {
             EnemyManager.instance.PlayerlastSeenPosition = _target.position;
             EnemyManager.instance.PlayerWasSeen = true;
@@ -58,8 +58,8 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     void RunList()
     {
         var currPoint = _path[_index];
-        currPoint.y = _enemyModel.transform.position.y;
-        Vector3 diff = currPoint - _enemyModel.transform.position;
+        currPoint.y = _redCubeModel.transform.position.y;
+        Vector3 diff = currPoint - _redCubeModel.transform.position;
         Vector3 dir = diff.normalized;
         float distance = diff.magnitude;
         if (distance < _minDistance)
@@ -72,13 +72,13 @@ public class GoToLastTargetSeenPosition<T> : State<T>
             _root.Execute();
             return;
         }
-        _enemyModel.LookDir(dir);
-        _enemyModel.Move(_enemyModel.GetFoward);
+        _redCubeModel.LookDir((dir + _obsAvoidance.GetDir()).normalized );
+        _redCubeModel.Move(_redCubeModel.GetFoward);
     }
     
     private void SetPath()
     {
-        Vector3 startPos = _enemyModel.transform.position;
+        Vector3 startPos = _redCubeModel.transform.position;
         _path = _ast.GetPath(startPos, IsSatisfied, GetNeighbours, GetCost, Heuristic);
         _index = 0;
     }

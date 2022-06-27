@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState<T> : CooldownState<T>
+public class IdleState<T> : CooldownState<T>// TODO add obstacle avoidance
 {
-    EnemyModel _enemyModel;
+    RedCubeModel _redCubeModel;
     Transform _target;
-    public IdleState(EnemyModel enemyModel, Transform target, float time, INode root) : base(time, root)
+    public IdleState(RedCubeModel redCubeModel, Transform target, float time, INode root) : base(time, root)
     {
-        _enemyModel = enemyModel;
+        _redCubeModel = redCubeModel;
         _target = target;
     }
     public override void Init()
     {
         base.Init();
         //Debug.Log("idle");
-        _enemyModel.Move(Vector3.zero);
+        _redCubeModel.Move(Vector3.zero);
     }
     public override void Execute()
     {
         base.Execute();
-        if (_enemyModel.LineOfSight(_target))
+        if (_redCubeModel.LineOfSight(_target))
         {
             EnemyManager.instance.PlayerWasSeen = true;
             EnemyManager.instance.PlayerlastSeenPosition = _target.position;
