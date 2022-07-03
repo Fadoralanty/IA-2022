@@ -17,10 +17,17 @@ public class RedCubeModel : Entity
     public float DamageDelay = 10f;
     public float CurrentTime = 0f;
     private bool _hasDamaged;
+    public Damageable _damageable;
     protected override void Awake()
     {
         base.Awake();
     }
+
+    private void Start()
+    {
+        _damageable=GetComponent<Damageable>();
+    }
+
     private void Update()
     {
         if (!_hasDamaged) return;

@@ -28,6 +28,15 @@ public class IdleState<T> : CooldownState<T>// TODO add obstacle avoidance
             return;
         }
 
+        if (_redCubeModel._damageable.WasDamaged)
+        {
+            _root.Execute();
+            EnemyManager.instance.PlayerWasSeen = true;
+            EnemyManager.instance.PlayerlastSeenPosition = _target.position;
+            _redCubeModel._damageable.WasDamaged = false;
+            return;
+        }
+
         if (EnemyManager.instance.PlayerWasSeen)
         {
             _root.Execute();

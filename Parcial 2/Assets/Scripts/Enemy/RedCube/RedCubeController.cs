@@ -80,9 +80,10 @@ public class RedCubeController : MonoBehaviour
 
         QuestionNode wasSeen = new QuestionNode(WasSeen, goToLastSeen, idle);
         QuestionNode inSight = new QuestionNode(InSight, chase, wasSeen);
+        QuestionNode wasDamaged = new QuestionNode(WasDamaged, chase, inSight);
         
 
-        _root = inSight;
+        _root = wasDamaged;
     }
     bool InSight()
     {
@@ -91,6 +92,11 @@ public class RedCubeController : MonoBehaviour
     bool WasSeen()
     {
         return EnemyManager.instance.PlayerWasSeen;
+    }
+
+    bool WasDamaged()
+    {
+        return _damageable.WasDamaged;
     }
     private void OnDieListener()
     {

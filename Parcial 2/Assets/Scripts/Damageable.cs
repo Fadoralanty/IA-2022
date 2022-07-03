@@ -18,6 +18,8 @@ public class Damageable : MonoBehaviour
     public bool IsInvulnerable => _isInvulnerable; //Quiero que el player tenga unos segundos de inmortalidad cuando le disparen y esquive
     [SerializeField] private bool _isInvulnerable;
 
+    public bool WasDamaged;
+
     private float _invulnerableTime;
     private float _currentInvulnerableTime;
 
@@ -33,6 +35,7 @@ public class Damageable : MonoBehaviour
     {
         _isDead = false;
         _isInvulnerable = false;
+        WasDamaged = false;
         _currentLife = _maxLife;
         OnLifeUpdate?.Invoke(_currentLife);
     }
@@ -54,7 +57,7 @@ public class Damageable : MonoBehaviour
     {
         if(_isInvulnerable) return;
         if (_isDead) return;
-        
+        WasDamaged = true;
         _currentLife -= damage;
         if(_currentLife <= 0)
         {
