@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public class GoToLastTargetSeenPosition<T> : State<T>
@@ -15,6 +16,8 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     int _index;
     float _minDistance = 0.5f;
     private float TargetRange = 2f;
+    private float _currentTime = 0;
+    private float _timer = 30;
     
     public GoToLastTargetSeenPosition(RedCubeModel redCubeModel, Transform target, INode root, ISteering obsAvoidance,
         LayerMask maskObs)
@@ -30,6 +33,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     public override void Init()
     {
         _lastSeenPos = EnemyManager.instance.PlayerlastSeenPosition;
+        _currentTime = 0f;
         base.Init();
         SetPath();
     }
@@ -38,9 +42,14 @@ public class GoToLastTargetSeenPosition<T> : State<T>
         base.Execute();
         if (_path == null || _path.Count < 2)
         {
-            _root.Execute();
+            _currentTime += Time.deltaTime;
+            if (_currentTime >= _timer)
+            {
+                SetPath();
+                _currentTime = 0;
+            }
         }
-        else if (EnemyManager.instance.PlayerWasSeen)
+        else if (!EnemyManager.instance.PlayerWasSeen)
         {
             _root.Execute();
         }
@@ -50,7 +59,10 @@ public class GoToLastTargetSeenPosition<T> : State<T>
             EnemyManager.instance.PlayerWasSeen = true;
             _root.Execute();
         }
-        RunList();
+        else
+        {
+            RunList();
+        }
     }
     public override void Exit()
     {
@@ -59,7 +71,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     }
     void RunList()
     {
-        if (_path== null) return;//TODO ver porque el path da null
+        //if (_path== null) return;
 
         var currPoint = _path[_index];
         currPoint.y = _redCubeModel.transform.position.y;
@@ -121,7 +133,10 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     }
     private bool IsSatisfied(Vector3 curr)
     {
-        float distance = Vector3.Distance(curr, _lastSeenPos);
+        var targetPos = EnemyManager.instance.PlayerlastSeenPosition;
+        targetPos.y = curr.y;
+        
+        float distance = Vector3.Distance(curr, targetPos);
         return distance <= TargetRange;
     }
 }
