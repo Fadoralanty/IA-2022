@@ -11,6 +11,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Level 1");
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene("Level 1"); ;

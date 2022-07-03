@@ -59,6 +59,8 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     }
     void RunList()
     {
+        if (_path== null) return;//TODO ver porque el path da null
+
         var currPoint = _path[_index];
         currPoint.y = _redCubeModel.transform.position.y;
         Vector3 diff = currPoint - _redCubeModel.transform.position;
