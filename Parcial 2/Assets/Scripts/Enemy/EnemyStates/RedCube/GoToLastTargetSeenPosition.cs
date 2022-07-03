@@ -39,14 +39,16 @@ public class GoToLastTargetSeenPosition<T> : State<T>
         if (_path == null || _path.Count < 2)
         {
             _root.Execute();
-            return;
         }
-        if (_redCubeModel.LineOfSight(_target))
+        else if (EnemyManager.instance.PlayerWasSeen)
+        {
+            _root.Execute();
+        }
+        else if (_redCubeModel.LineOfSight(_target))
         {
             EnemyManager.instance.PlayerlastSeenPosition = _target.position;
             EnemyManager.instance.PlayerWasSeen = true;
             _root.Execute();
-            return;
         }
         RunList();
     }

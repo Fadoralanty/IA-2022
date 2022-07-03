@@ -39,7 +39,8 @@ public class RedCubeController : MonoBehaviour
     private void Start()
     {
         GameManager.instance.enemies.Add(gameObject);
-        target = GameManager.instance.Player.transform;
+        if(!target)
+            target = GameManager.instance.Player.transform;
         InitializedTree();
         InitializedFSM();
     }

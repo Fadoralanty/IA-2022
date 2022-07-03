@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject HUD;    
     [SerializeField] private GameObject GameOverScreen;     
     [SerializeField] private GameObject Victory_Screen;
-    
+
     public string currentLevel;
 
     public void Start()
@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
         currentLevel = SceneManager.GetActiveScene().name;
         OnScoreChange?.Invoke(currentScore);
         OnMultiplierChange?.Invoke(scoreMultiplier);
+        GameOverScreen.SetActive(false);
+        Victory_Screen.SetActive(false);
     }
     
     private void Awake()
@@ -55,13 +57,15 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         currentGameTime -= Time.deltaTime;
-        if (currentGameTime <= 0)
+        if (currentGameTime <= 0 && !_isGameFinished)
         {
+            _isGameFinished = true;
             GameOver();
         }
 
-        if (enemies.Count == 0)
+        if (enemies.Count == 0 && !_isGameFinished)
         {
+            _isGameFinished = true;
             GameCompleted();
         }
         
@@ -69,17 +73,12 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        _isGameFinished = true;
         StartCoroutine(LoadMainMenu());
     }
 
     IEnumerator LoadMainMenu()
     {
-        if (_isGameFinished)
-        {
-            Instantiate(GameOverScreen);
-            _isGameFinished = false;
-        }
+        GameOverScreen.SetActive(true);
         HUD.SetActive(false);
         Player.gameObject.SetActive(false);
         yield return new WaitForSeconds(3f);
@@ -88,17 +87,11 @@ public class GameManager : MonoBehaviour
 
     public void GameCompleted() //llamar al matar a un boss
     {
-        _isGameFinished = true;
         StartCoroutine(LoadNextLevel(NextLevel));
     }
     IEnumerator LoadNextLevel(string levelName)
     {
-        if (_isGameFinished)
-        {
-            Instantiate(Victory_Screen);
-            _isGameFinished = false;
-        }
-
+        Victory_Screen.SetActive(true);
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(levelName);
         currentLevel = levelName;
