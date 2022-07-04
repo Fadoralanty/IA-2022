@@ -1604,10 +1604,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedCube (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 5414637441794715551, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
-      propertyPath: pathMask.m_Bits
-      value: 7168
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
 --- !u!1001 &920157612
