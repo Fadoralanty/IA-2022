@@ -35,7 +35,8 @@ public class BlueCubeController : MonoBehaviour
     private void OnDieListener()
     {
         GameManager.instance.enemies.Remove(gameObject);
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
+        Destroy(gameObject);
     }
     private void Start()
     {
