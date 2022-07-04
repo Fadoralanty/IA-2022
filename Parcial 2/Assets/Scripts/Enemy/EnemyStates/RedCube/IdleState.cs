@@ -2,25 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState<T> : CooldownState<T>// TODO add obstacle avoidance
+public class IdleState<T> : CooldownState<T>
 {
-    RedCubeModel _redCubeModel;
+    EnemyModel _enemyModel;
     Transform _target;
-    public IdleState(RedCubeModel redCubeModel, Transform target, float time, INode root) : base(time, root)
+    public IdleState(EnemyModel enemyModel, Transform target, float time, INode root) : base(time, root)
     {
-        _redCubeModel = redCubeModel;
+        _enemyModel = enemyModel;
         _target = target;
     }
     public override void Init()
     {
+        Debug.Log("idle");
         base.Init();
         //Debug.Log("idle");
-        _redCubeModel.Move(Vector3.zero);
+        _enemyModel.Move(Vector3.zero);
     }
     public override void Execute()
     {
         base.Execute();
-        if (_redCubeModel.LineOfSight(_target))
+        if (_enemyModel.LineOfSight(_target))
         {
             EnemyManager.instance.PlayerWasSeen = true;
             EnemyManager.instance.PlayerlastSeenPosition = _target.position;
@@ -28,12 +29,12 @@ public class IdleState<T> : CooldownState<T>// TODO add obstacle avoidance
             return;
         }
 
-        if (_redCubeModel._damageable.WasDamaged)
+        if (_enemyModel._damageable.WasDamaged)
         {
             _root.Execute();
             EnemyManager.instance.PlayerWasSeen = true;
             EnemyManager.instance.PlayerlastSeenPosition = _target.position;
-            _redCubeModel._damageable.WasDamaged = false;
+            _enemyModel._damageable.WasDamaged = false;
             return;
         }
 
