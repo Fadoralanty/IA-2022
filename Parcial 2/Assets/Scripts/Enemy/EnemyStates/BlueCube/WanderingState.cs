@@ -9,11 +9,13 @@ public class WanderingState<T> : CooldownState<T>
     float _randomAngle;
     Vector3 _dir;
     ISteering _steering;
+    private IFlockingBehaviour _separation;
 
-    public WanderingState(BlueCubeModel blueCubeModel, Transform target, ISteering steering, float randomAngle, float time, INode root) : base(time, root)
+    public WanderingState(BlueCubeModel blueCubeModel, Transform target, ISteering steering, float randomAngle, float time, INode root, IFlockingBehaviour separation) : base(time, root)
     {
         _blueCubeModel = blueCubeModel;
         _randomAngle = randomAngle;
+        _separation = separation;
         _target = target;
         _steering = steering;
     }
@@ -25,7 +27,7 @@ public class WanderingState<T> : CooldownState<T>
     public override void Execute()
     {
         base.Execute();
-        _blueCubeModel.LookDir(_dir + _steering.GetDir());
+        _blueCubeModel.LookDir(_dir + _steering.GetDir() + _separation.GetDir(EnemyManager.instance.enemies, _blueCubeModel.transform));
         _blueCubeModel.Move(_blueCubeModel.transform.forward);
         if (_blueCubeModel.LineOfSight(_target))
         {

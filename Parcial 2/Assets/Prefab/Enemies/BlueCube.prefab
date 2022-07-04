@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3811940848425325573}
   - component: {fileID: 4100457336174887758}
   - component: {fileID: 2258326274830589064}
+  - component: {fileID: 102034856676815850}
   m_Layer: 9
   m_Name: BlueCube
   m_TagString: Untagged
@@ -153,6 +154,7 @@ MonoBehaviour:
   maskObstacles:
     serializedVersion: 2
     m_Bits: 1024
+  _damageable: {fileID: 0}
 --- !u!114 &2258326274830589064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,3 +177,17 @@ MonoBehaviour:
   obsAngle: 300
   waitTime: 2
   randomAngle: 90
+--- !u!114 &102034856676815850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3811940848425325583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf09c319c9f777419f0dfa45649dc17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 2
+  _multiplier: 1

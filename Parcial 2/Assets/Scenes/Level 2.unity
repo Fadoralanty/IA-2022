@@ -1891,42 +1891,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1204234941 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3811940848425325583, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
-  m_PrefabInstance: {fileID: 1944520840}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1204234942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204234941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaf09c319c9f777419f0dfa45649dc17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 2
-  _multiplier: 1
---- !u!114 &1204234943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1204234941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0404083bcd827074fa53dfdde976977e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 2
-  capacity: 10
-  maskBoids:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &1218252720 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2846838504209711615, guid: 2ac42b41a0705614d90e3c0c06c43a31, type: 3}

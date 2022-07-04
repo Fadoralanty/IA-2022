@@ -28,10 +28,13 @@ public class BlueCubeController : MonoBehaviour
     private INode _root;
     private IState<States> _idleState;
     private IState<States> _fleeState;
+
+    private IFlockingBehaviour _separation;
     private void Awake()
     {
         _damageable = GetComponent<Damageable>();
         _blueCubeModel = GetComponent<BlueCubeModel>();
+        _separation = GetComponent<IFlockingBehaviour>();
         _damageable.OnDie.AddListener(OnDieListener);
     }
     private void OnDieListener()
@@ -63,7 +66,7 @@ public class BlueCubeController : MonoBehaviour
         _fsm = new FSM<States>();
         _idleState = new IdleState<States>(_blueCubeModel, target, waitTime, _root);
         _fleeState = new FleeState<States>(_root, _blueCubeModel, target, flee, obsAvoidance);
-        WanderingState<States> wanderState = new WanderingState<States>(_blueCubeModel, target, obsAvoidance, randomAngle, waitTime, _root);
+        WanderingState<States> wanderState = new WanderingState<States>(_blueCubeModel, target, obsAvoidance, randomAngle, waitTime, _root,_separation);
         GoToSafeSpot<States> goToSafeSpotState = new GoToSafeSpot<States>(_blueCubeModel, target, _root, obsAvoidance, obsMask);
 
         goToSafeSpotState.AddTransition(States.Flee,_fleeState);
