@@ -65,7 +65,7 @@ public class BlueCubeController : MonoBehaviour
 
         _fsm = new FSM<States>();
         _idleState = new IdleState<States>(_blueCubeModel, target, waitTime, _root);
-        _fleeState = new FleeState<States>(_root, _blueCubeModel, target, flee, obsAvoidance);
+        _fleeState = new FleeState<States>(_root, _blueCubeModel, target, flee, obsAvoidance, _separation);
         WanderingState<States> wanderState = new WanderingState<States>(_blueCubeModel, target, obsAvoidance, randomAngle, waitTime, _root,_separation);
         GoToSafeSpot<States> goToSafeSpotState = new GoToSafeSpot<States>(_blueCubeModel, target, _root, obsAvoidance, obsMask);
 
