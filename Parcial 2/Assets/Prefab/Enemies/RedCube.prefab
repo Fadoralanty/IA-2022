@@ -136,7 +136,7 @@ MonoBehaviour:
   target: {fileID: 0}
   obsMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 3072
   obsRange: 1.52
   obsAngle: 199.14
   waitTime: 2
@@ -157,6 +157,7 @@ MonoBehaviour:
   _currentLife: 0
   _maxLife: 50
   _isInvulnerable: 0
+  WasDamaged: 0
   OnDie:
     m_PersistentCalls:
       m_Calls: []
@@ -182,6 +183,7 @@ MonoBehaviour:
   _damage: 15
   DamageDelay: 1
   CurrentTime: 0
+  _damageable: {fileID: 0}
 --- !u!114 &1795560820785789056
 MonoBehaviour:
   m_ObjectHideFlags: 0

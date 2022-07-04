@@ -130,6 +130,7 @@ MonoBehaviour:
   _currentLife: 0
   _maxLife: 30
   _isInvulnerable: 0
+  WasDamaged: 0
   OnDie:
     m_PersistentCalls:
       m_Calls: []
@@ -169,7 +170,7 @@ MonoBehaviour:
   target: {fileID: 0}
   obsMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 3072
   obsRange: 1.52
   obsAngle: 300
   waitTime: 2

@@ -125,7 +125,9 @@ public class GoToLastTargetSeenPosition<T> : State<T>
                 Vector3 diff = newPos - curr;
                 Vector3 dir = diff.normalized;
                 float distance = diff.magnitude;
-                if (Physics.Raycast(curr, dir, distance, _maskObs)) continue;
+                RaycastHit hit;
+                bool obstacleHit = Physics.SphereCast(curr, 2, dir, out hit, distance,_maskObs);
+                if (obstacleHit) continue;
                 neighbours.Add(newPos);
             }
         }
