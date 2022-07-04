@@ -8,6 +8,7 @@ public class EnemyManager : MonoBehaviour
     public bool PlayerWasSeen;
     public Vector3 PlayerlastSeenPosition = Vector3.zero;
 
+    public List<Transform> enemies = new List<Transform>();
     public List<Transform> SafeSpots = new List<Transform>();
     private void Awake()
     {

@@ -37,12 +37,15 @@ public class BlueCubeController : MonoBehaviour
     private void OnDieListener()
     {
         GameManager.instance.enemies.Remove(gameObject);
+        EnemyManager.instance.enemies.Remove(gameObject.transform);
+
         // gameObject.SetActive(false);
         Destroy(gameObject);
     }
     private void Start()
     {
         GameManager.instance.enemies.Add(gameObject);
+        EnemyManager.instance.enemies.Add(gameObject.transform);
         target = GameManager.instance.Player.transform;
         InitializedTree();
         InitializedFSM();

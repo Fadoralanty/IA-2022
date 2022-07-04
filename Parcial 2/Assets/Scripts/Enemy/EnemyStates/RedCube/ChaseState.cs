@@ -10,14 +10,16 @@ public class ChaseState<T> : State<T>
     Transform _target;
     ISteering _seek;
     ISteering _obsAvoidance;
-    
-    public ChaseState(INode root, RedCubeModel redCube, Transform target, ISteering seek, ISteering obsAvoidance)
+    private IFlockingBehaviour _separation; //distancia social
+    public ChaseState(INode root, RedCubeModel redCube, Transform target, ISteering seek, ISteering obsAvoidance, 
+        IFlockingBehaviour separation)
     {
         _root = root;
         _redCube = redCube;
         _target = target;
         _seek = seek;
         _obsAvoidance = obsAvoidance;
+        _separation = separation;
     }
 
     public override void Init()
@@ -29,7 +31,7 @@ public class ChaseState<T> : State<T>
     public override void Execute()
     {
         base.Execute();
-        Vector3 dir = _seek.GetDir() + _obsAvoidance.GetDir();
+        Vector3 dir = _seek.GetDir() + _obsAvoidance.GetDir() + _separation.GetDir(EnemyManager.instance.enemies ,_redCube.transform);
         _redCube.LookDir(dir.normalized);
         _redCube.Move(_redCube.transform.forward);
         if (!_redCube.LineOfSight(_target))
@@ -39,6 +41,5 @@ public class ChaseState<T> : State<T>
         }
         
     }
-    
     
 }

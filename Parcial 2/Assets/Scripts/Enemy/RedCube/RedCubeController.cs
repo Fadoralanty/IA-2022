@@ -28,17 +28,20 @@ public class RedCubeController : MonoBehaviour
     private FSM<States> _fsm;
     private INode _root;
     private IState<States> _idleState;
+    private IFlockingBehaviour _separation;
 
     private void Awake()
     {
         _damageable = GetComponent<Damageable>();
         redCubeModel = GetComponent<RedCubeModel>();
+        _separation = GetComponent<IFlockingBehaviour>();
         _damageable.OnDie.AddListener(OnDieListener);
     }
 
     private void Start()
     {
         GameManager.instance.enemies.Add(gameObject);
+        EnemyManager.instance.enemies.Add(gameObject.transform);
         if(!target)
             target = GameManager.instance.Player.transform;
         InitializedTree();
@@ -57,7 +60,7 @@ public class RedCubeController : MonoBehaviour
 
         _fsm = new FSM<States>();
         _idleState = new IdleState<States>(redCubeModel, target, waitTime, _root);
-        ChaseState<States> chaseState = new ChaseState<States>(_root, redCubeModel, target, seek, obsAvoidance);
+        ChaseState<States> chaseState = new ChaseState<States>(_root, redCubeModel, target, seek, obsAvoidance, _separation);
         GoToLastTargetSeenPosition<States> goToLastSeenPos = new GoToLastTargetSeenPosition<States>(redCubeModel, target, _root, obsAvoidance, obsMask);
         
         _idleState.AddTransition(States.Chase,chaseState);
@@ -101,6 +104,8 @@ public class RedCubeController : MonoBehaviour
     private void OnDieListener()
     {
         GameManager.instance.enemies.Remove(gameObject);
+        EnemyManager.instance.enemies.Remove(gameObject.transform);
+
         // gameObject.SetActive(false);
         Destroy(gameObject);
     }
