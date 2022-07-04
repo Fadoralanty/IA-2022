@@ -8,6 +8,7 @@ public class GoToSafeSpot<T> : State<T>
     
     INode _root;
     ISteering _obsAvoidance;
+    private IFlockingBehaviour _separation;
     LayerMask _maskObs;
     
     private Transform _safeSpot;
@@ -22,7 +23,7 @@ public class GoToSafeSpot<T> : State<T>
     
     private Roulette<Transform> _rouletteSafeSpot;
     private Dictionary<Transform, int> _safeSpotsDictionary;
-    public GoToSafeSpot(EnemyModel enemyModel, Transform target, INode root, ISteering obsAvoidance, LayerMask maskObs)
+    public GoToSafeSpot(EnemyModel enemyModel, Transform target, INode root, ISteering obsAvoidance, LayerMask maskObs, IFlockingBehaviour separation)
     {
         _ast = new Astar<Vector3>();
         _safeSpotsDictionary = new Dictionary<Transform, int>();
@@ -36,6 +37,7 @@ public class GoToSafeSpot<T> : State<T>
         _root = root;
         _obsAvoidance = obsAvoidance;
         _maskObs = maskObs;
+        _separation = separation;
     }
 
     public override void Init()
@@ -93,7 +95,7 @@ public class GoToSafeSpot<T> : State<T>
             _root.Execute();
             return;
         }
-        _enemyModel.LookDir((dir + _obsAvoidance.GetDir()).normalized );
+        _enemyModel.LookDir((dir + _obsAvoidance.GetDir() + _separation.GetDir(EnemyManager.instance.enemies,_enemyModel.transform)).normalized);
         _enemyModel.Move(_enemyModel.GetFoward);
     }
     
