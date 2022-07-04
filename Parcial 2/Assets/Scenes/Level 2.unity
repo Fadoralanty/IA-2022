@@ -1674,6 +1674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlueCube (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3811940848425325583, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
 --- !u!198 &1048990154 stripped
@@ -1792,6 +1796,10 @@ PrefabInstance:
     - target: {fileID: 3811940848425325583, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
       propertyPath: m_Name
       value: BlueCube (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811940848425325583, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
@@ -3813,6 +3821,10 @@ PrefabInstance:
     - target: {fileID: 3811940848425325583, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
       propertyPath: m_Name
       value: BlueCube (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811940848425325583, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}

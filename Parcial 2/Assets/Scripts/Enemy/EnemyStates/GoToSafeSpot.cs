@@ -23,7 +23,8 @@ public class GoToSafeSpot<T> : State<T>
     
     private Roulette<Transform> _rouletteSafeSpot;
     private Dictionary<Transform, int> _safeSpotsDictionary;
-    public GoToSafeSpot(EnemyModel enemyModel, Transform target, INode root, ISteering obsAvoidance, LayerMask maskObs, IFlockingBehaviour separation)
+    public GoToSafeSpot(EnemyModel enemyModel, Transform target, INode root, ISteering obsAvoidance, 
+        LayerMask maskObs, IFlockingBehaviour separation)
     {
         _ast = new Astar<Vector3>();
         _safeSpotsDictionary = new Dictionary<Transform, int>();
@@ -52,6 +53,7 @@ public class GoToSafeSpot<T> : State<T>
     {
         base.Exit();
         _path = null;
+        _safeSpot = null;
     }
     public override void Execute()
     {
@@ -142,6 +144,7 @@ public class GoToSafeSpot<T> : State<T>
     }
     private bool IsSatisfied(Vector3 curr)
     {
+        //Debug.Log(_safeSpot.position);
         var targetPos = _safeSpot.position;
         targetPos.y = curr.y;
         
