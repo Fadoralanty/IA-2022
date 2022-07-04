@@ -29,6 +29,8 @@ public class WanderingState<T> : CooldownState<T>
         _blueCubeModel.Move(_blueCubeModel.transform.forward);
         if (_blueCubeModel.LineOfSight(_target))
         {
+            EnemyManager.instance.PlayerWasSeen = true;
+            EnemyManager.instance.PlayerlastSeenPosition = _target.position;
             _root.Execute();
         }
     }
