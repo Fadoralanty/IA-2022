@@ -56,7 +56,7 @@ public class BlueCubeController : MonoBehaviour
         ISteering flee = new Flee(_blueCubeModel.transform, target);
 
         _fsm = new FSM<States>();
-        _idleState = new BlueIdle<States>(_blueCubeModel, target, waitTime, _root);
+        _idleState = new IdleState<States>(_blueCubeModel, target, waitTime, _root);
         FleeState<States> fleeState = new FleeState<States>(_root, _blueCubeModel, target, flee, obsAvoidance);
         WanderingState<States> wanderState = new WanderingState<States>(_blueCubeModel, target, obsAvoidance, randomAngle, waitTime, _root);
 

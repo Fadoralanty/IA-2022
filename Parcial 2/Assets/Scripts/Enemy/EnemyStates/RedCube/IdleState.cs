@@ -13,7 +13,6 @@ public class IdleState<T> : CooldownState<T>
     }
     public override void Init()
     {
-        Debug.Log("idle");
         base.Init();
         //Debug.Log("idle");
         _enemyModel.Move(Vector3.zero);
