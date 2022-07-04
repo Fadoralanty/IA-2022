@@ -11,6 +11,7 @@ public class GoToSafeSpot<T> : State<T>
     LayerMask _maskObs;
     
     private Transform _safeSpot;
+    private Transform _target;
     Astar<Vector3> _ast;
     List<Vector3> _path;
     int _index;
@@ -21,7 +22,7 @@ public class GoToSafeSpot<T> : State<T>
     
     private Roulette<Transform> _rouletteSafeSpot;
     private Dictionary<Transform, int> _safeSpotsDictionary;
-    public GoToSafeSpot(EnemyModel enemyModel, INode root, ISteering obsAvoidance, LayerMask maskObs)
+    public GoToSafeSpot(EnemyModel enemyModel, Transform target, INode root, ISteering obsAvoidance, LayerMask maskObs)
     {
         _ast = new Astar<Vector3>();
         _safeSpotsDictionary = new Dictionary<Transform, int>();
@@ -31,6 +32,7 @@ public class GoToSafeSpot<T> : State<T>
         }
         _rouletteSafeSpot = new Roulette<Transform>();
         _enemyModel = enemyModel;
+        _target = target;
         _root = root;
         _obsAvoidance = obsAvoidance;
         _maskObs = maskObs;
@@ -38,7 +40,7 @@ public class GoToSafeSpot<T> : State<T>
 
     public override void Init()
     {
-        Debug.Log("gotosafe");
+        //Debug.Log("gotosafe");
         base.Init();
         _safeSpot = _rouletteSafeSpot.Run(_safeSpotsDictionary);
         _currentTime = 0f;
@@ -49,7 +51,7 @@ public class GoToSafeSpot<T> : State<T>
         base.Exit();
         _path = null;
     }
-    public override void Execute() //TODO add playerSeen and damage reaction
+    public override void Execute()
     {
         base.Execute();
         if (_path == null || _path.Count < 2)
@@ -60,6 +62,12 @@ public class GoToSafeSpot<T> : State<T>
                 SetPath();
                 _currentTime = 0;
             }
+        }
+        else if (_enemyModel.LineOfSight(_target))
+        {
+            EnemyManager.instance.PlayerlastSeenPosition = _target.position;
+            EnemyManager.instance.PlayerWasSeen = true;
+            _root.Execute();
         }
         else
         {
