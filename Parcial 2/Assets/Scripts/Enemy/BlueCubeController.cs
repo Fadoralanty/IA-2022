@@ -20,12 +20,14 @@ public class BlueCubeController : MonoBehaviour
     {
         idle,
         Flee,
-        Wander
+        Wander,
+        GoToSafeSpot
     }
     
     private FSM<States> _fsm;
     private INode _root;
     private IState<States> _idleState;
+    private IState<States> _fleeState;
     private void Awake()
     {
         _damageable = GetComponent<Damageable>();
@@ -57,17 +59,22 @@ public class BlueCubeController : MonoBehaviour
 
         _fsm = new FSM<States>();
         _idleState = new IdleState<States>(_blueCubeModel, target, waitTime, _root);
-        FleeState<States> fleeState = new FleeState<States>(_root, _blueCubeModel, target, flee, obsAvoidance);
+        _fleeState = new FleeState<States>(_root, _blueCubeModel, target, flee, obsAvoidance);
         WanderingState<States> wanderState = new WanderingState<States>(_blueCubeModel, target, obsAvoidance, randomAngle, waitTime, _root);
+        GoToSafeSpot<States> goToSafeSpotState = new GoToSafeSpot<States>(_blueCubeModel, _root, obsAvoidance, obsMask);
 
-        _idleState.AddTransition(States.Flee,fleeState);
+        goToSafeSpotState.AddTransition(States.Flee,_fleeState);
+        goToSafeSpotState.AddTransition(States.idle,_idleState);
+        
+        _idleState.AddTransition(States.Flee,_fleeState);
         _idleState.AddTransition(States.Wander,wanderState);
         
         wanderState.AddTransition(States.idle,_idleState);
-        wanderState.AddTransition(States.Flee,fleeState);
+        wanderState.AddTransition(States.Flee,_fleeState);
 
-        fleeState.AddTransition(States.idle,_idleState);
-        fleeState.AddTransition(States.Wander,wanderState);
+        _fleeState.AddTransition(States.idle,_idleState);
+        _fleeState.AddTransition(States.Wander,wanderState);
+        _fleeState.AddTransition(States.GoToSafeSpot, goToSafeSpotState);
         
         _fsm.SetInit(wanderState);
     }
@@ -76,11 +83,19 @@ public class BlueCubeController : MonoBehaviour
         ActionNode idle = new ActionNode(() => _fsm.Transition(States.idle));
         ActionNode flee = new ActionNode(() => _fsm.Transition(States.Flee));
         ActionNode wander = new ActionNode(() => _fsm.Transition(States.Wander));
-        
+        ActionNode goToSafeSpot = new ActionNode(() => _fsm.Transition(States.GoToSafeSpot));
+
         QuestionNode isIdle = new QuestionNode(IsIdle, wander, idle);
-        QuestionNode inSight = new QuestionNode(InSight, flee, isIdle);
+        QuestionNode isFleeing = new QuestionNode(IsFleeing, goToSafeSpot, isIdle);
+        QuestionNode inSight = new QuestionNode(InSight, flee, isFleeing);
+        
 
         _root = inSight;
+    }
+
+    bool IsFleeing()
+    {
+        return _fsm.GetCurrentState == _fleeState ;
     }
     bool IsIdle()
     {

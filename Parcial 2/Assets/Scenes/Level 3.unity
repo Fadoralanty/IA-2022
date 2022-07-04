@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5414637441794715538, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5414637441794715538, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_LocalPosition.x
@@ -177,6 +177,10 @@ PrefabInstance:
     - target: {fileID: 5414637441794715542, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_Name
       value: RedCube (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414637441794715542, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
@@ -561,6 +565,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedCube
       objectReference: {fileID: 0}
+    - target: {fileID: 5414637441794715542, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
 --- !u!43 &423627256
@@ -837,7 +845,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3811940848425325579, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3811940848425325579, guid: 53769b6d07fb195479c9bb1e53a0bd54, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1488,7 +1496,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5414637441794715538, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5414637441794715538, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1533,6 +1541,10 @@ PrefabInstance:
     - target: {fileID: 5414637441794715542, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_Name
       value: RedCube (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414637441794715542, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
@@ -1716,7 +1728,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5414637441794715538, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5414637441794715538, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1761,6 +1773,10 @@ PrefabInstance:
     - target: {fileID: 5414637441794715542, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_Name
       value: RedCube (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414637441794715542, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
@@ -5233,6 +5249,10 @@ PrefabInstance:
     - target: {fileID: 5414637441794715542, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
       propertyPath: m_Name
       value: RedCube (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5414637441794715542, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677fd826c47a09b46bd67023c7285040, type: 3}

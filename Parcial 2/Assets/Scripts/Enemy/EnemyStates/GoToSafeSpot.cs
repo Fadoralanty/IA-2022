@@ -21,7 +21,7 @@ public class GoToSafeSpot<T> : State<T>
     
     private Roulette<Transform> _rouletteSafeSpot;
     private Dictionary<Transform, int> _safeSpotsDictionary;
-    public GoToSafeSpot(EnemyModel enemyModel, Transform target, INode root, ISteering obsAvoidance, LayerMask maskObs)
+    public GoToSafeSpot(EnemyModel enemyModel, INode root, ISteering obsAvoidance, LayerMask maskObs)
     {
         _ast = new Astar<Vector3>();
         _safeSpotsDictionary = new Dictionary<Transform, int>();
@@ -38,6 +38,7 @@ public class GoToSafeSpot<T> : State<T>
 
     public override void Init()
     {
+        Debug.Log("gotosafe");
         base.Init();
         _safeSpot = _rouletteSafeSpot.Run(_safeSpotsDictionary);
         _currentTime = 0f;
