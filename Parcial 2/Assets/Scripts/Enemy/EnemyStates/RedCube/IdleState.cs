@@ -30,9 +30,9 @@ public class IdleState<T> : CooldownState<T>
 
         if (_enemyModel._damageable.WasDamaged)
         {
-            _root.Execute();
             EnemyManager.instance.PlayerWasSeen = true;
             EnemyManager.instance.PlayerlastSeenPosition = _target.position;
+            _root.Execute();
             _enemyModel._damageable.WasDamaged = false;
             return;
         }
