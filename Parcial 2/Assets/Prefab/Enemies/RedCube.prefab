@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageable: {fileID: 5414637441794715548}
   redCubeModel: {fileID: 0}
+  _patrolSpots: []
   target: {fileID: 0}
   obsMask:
     serializedVersion: 2
@@ -174,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   _rb: {fileID: 0}
-  rangeSight: 10
+  rangeSight: 12
   angleSight: 200
   maskObstacles:
     serializedVersion: 2

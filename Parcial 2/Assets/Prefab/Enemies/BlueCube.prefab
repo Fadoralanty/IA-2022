@@ -176,7 +176,7 @@ MonoBehaviour:
   obsRange: 1.52
   obsAngle: 300
   waitTime: 2
-  randomAngle: 90
+  randomAngle: 180
 --- !u!114 &102034856676815850
 MonoBehaviour:
   m_ObjectHideFlags: 0
