@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class PatrolState<T> : State<T>
 {
+
     private EnemyModel _enemyModel;
     private Transform[] _patrolSpots;
+    private INode _root;
+    private Transform _target;
     private int _index;
     private int _lastIndex = 0;
     private bool _isGoingBackwards;
-    private INode _root;
-    private Transform _target;
+    private ISteering _avoidance;
+    public PatrolState(EnemyModel enemyModel, Transform[] patrolSpots, INode root, Transform target, ISteering avoidance)
+    {
+        _enemyModel = enemyModel;
+        _patrolSpots = patrolSpots;
+        _root = root;
+        _target = target;
+        _avoidance = avoidance;
+    }
     public override void Init()
     {
         //Debug.Log("patrol");
@@ -67,8 +77,8 @@ public class PatrolState<T> : State<T>
         {
             Vector3 dir = _patrolSpots[_index].position - _enemyModel.transform.position;
             //Debug.DrawLine(_enemy.transform.position, _enemy.transform.position+dir, Color.red);
-            _enemyModel.Move(dir.normalized);
-            _enemyModel.LookDir(dir.normalized);
+            _enemyModel.LookDir((dir + _avoidance.GetDir()).normalized);
+            _enemyModel.Move(_enemyModel.GetFoward);
         }
     }
     public override void Exit()

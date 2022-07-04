@@ -7,7 +7,7 @@ public class RedCubeController : MonoBehaviour
 {
     [SerializeField] private Damageable _damageable;
     [SerializeField] private RedCubeModel redCubeModel;
-
+    [SerializeField] private Transform[] _patrolSpots;
     public Transform target;
     [Header("Obs Avoidance")]
     public LayerMask obsMask;
@@ -22,12 +22,14 @@ public class RedCubeController : MonoBehaviour
     {
         idle,
         Chase,
-        GoToLastSeenPos
+        GoToLastSeenPos,
+        patrol
     }
 
     private FSM<States> _fsm;
     private INode _root;
     private IState<States> _idleState;
+    private IState<States> _patrolState;
     private IFlockingBehaviour _separation;
 
     private void Awake()
@@ -62,9 +64,15 @@ public class RedCubeController : MonoBehaviour
         _idleState = new IdleState<States>(redCubeModel, target, waitTime, _root);
         ChaseState<States> chaseState = new ChaseState<States>(_root, redCubeModel, target, seek, obsAvoidance, _separation);
         GoToLastTargetSeenPosition<States> goToLastSeenPos = new GoToLastTargetSeenPosition<States>(redCubeModel, target, _root, obsAvoidance, obsMask, _separation);
+        _patrolState = new PatrolState<States>(redCubeModel, _patrolSpots, _root, target, obsAvoidance);
         
+        _patrolState.AddTransition(States.idle, _idleState);
+        _patrolState.AddTransition(States.Chase,chaseState);
+        _patrolState.AddTransition(States.GoToLastSeenPos,goToLastSeenPos);
+
         _idleState.AddTransition(States.Chase,chaseState);
         _idleState.AddTransition(States.GoToLastSeenPos,goToLastSeenPos);
+        _idleState.AddTransition(States.patrol,_patrolState);
 
         goToLastSeenPos.AddTransition(States.idle, _idleState);
         goToLastSeenPos.AddTransition(States.Chase, chaseState);
@@ -80,8 +88,10 @@ public class RedCubeController : MonoBehaviour
         ActionNode idle = new ActionNode(() => _fsm.Transition(States.idle));
         ActionNode chase = new ActionNode(() => _fsm.Transition(States.Chase));
         ActionNode goToLastSeen = new ActionNode(() => _fsm.Transition(States.GoToLastSeenPos));
+        ActionNode patrol = new ActionNode(() => _fsm.Transition(States.patrol));
 
-        QuestionNode wasSeen = new QuestionNode(WasSeen, goToLastSeen, idle);
+        QuestionNode isPatrol = new QuestionNode(IsPatrolling, idle, patrol);
+        QuestionNode wasSeen = new QuestionNode(WasSeen, goToLastSeen, isPatrol);
         QuestionNode inSight = new QuestionNode(InSight, chase, wasSeen);
         QuestionNode wasDamaged = new QuestionNode(WasDamaged, chase, inSight);
         
@@ -95,6 +105,11 @@ public class RedCubeController : MonoBehaviour
     bool WasSeen()
     {
         return EnemyManager.instance.PlayerWasSeen;
+    }
+
+    bool IsPatrolling()
+    {
+        return _fsm.GetCurrentState == _patrolState;
     }
 
     bool WasDamaged()
