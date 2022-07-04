@@ -10,6 +10,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     INode _root;
     Vector3 _lastSeenPos;
     ISteering _obsAvoidance;
+    private IFlockingBehaviour _separation;
     LayerMask _maskObs;
     Astar<Vector3> _ast;
     List<Vector3> _path;
@@ -20,7 +21,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
     private float _timer = 30;
     
     public GoToLastTargetSeenPosition(RedCubeModel redCubeModel, Transform target, INode root, ISteering obsAvoidance,
-        LayerMask maskObs)
+        LayerMask maskObs, IFlockingBehaviour separation)
     {
         _ast = new Astar<Vector3>();
         _redCubeModel = redCubeModel;
@@ -28,6 +29,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
         _root = root;
         _obsAvoidance = obsAvoidance;
         _maskObs = maskObs;
+        _separation = separation;
     }
 
     public override void Init()
@@ -88,7 +90,7 @@ public class GoToLastTargetSeenPosition<T> : State<T>
             _root.Execute();
             return;
         }
-        _redCubeModel.LookDir((dir + _obsAvoidance.GetDir()).normalized );
+        _redCubeModel.LookDir((dir + _obsAvoidance.GetDir() + _separation.GetDir(EnemyManager.instance.enemies, _redCubeModel.transform)).normalized);
         _redCubeModel.Move(_redCubeModel.GetFoward);
     }
     

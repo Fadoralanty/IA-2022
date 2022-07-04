@@ -61,7 +61,7 @@ public class RedCubeController : MonoBehaviour
         _fsm = new FSM<States>();
         _idleState = new IdleState<States>(redCubeModel, target, waitTime, _root);
         ChaseState<States> chaseState = new ChaseState<States>(_root, redCubeModel, target, seek, obsAvoidance, _separation);
-        GoToLastTargetSeenPosition<States> goToLastSeenPos = new GoToLastTargetSeenPosition<States>(redCubeModel, target, _root, obsAvoidance, obsMask);
+        GoToLastTargetSeenPosition<States> goToLastSeenPos = new GoToLastTargetSeenPosition<States>(redCubeModel, target, _root, obsAvoidance, obsMask, _separation);
         
         _idleState.AddTransition(States.Chase,chaseState);
         _idleState.AddTransition(States.GoToLastSeenPos,goToLastSeenPos);
