@@ -32,6 +32,16 @@ public class WanderingState<T> : CooldownState<T>
             EnemyManager.instance.PlayerWasSeen = true;
             EnemyManager.instance.PlayerlastSeenPosition = _target.position;
             _root.Execute();
+            return;
+        }
+        
+        if (_blueCubeModel._damageable.WasDamaged)
+        {
+            EnemyManager.instance.PlayerWasSeen = true;
+            EnemyManager.instance.PlayerlastSeenPosition = _target.position;
+            _root.Execute();
+            _blueCubeModel._damageable.WasDamaged = false;
+            return;
         }
     }
 }
