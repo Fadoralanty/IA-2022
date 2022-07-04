@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoToSafeSpot<T> : State<T>
+public class GoToSafeSpot<T> : State<T>//MOSTRAR ESTADO CON UN SOLO ENEMIGO
 {
     EnemyModel _enemyModel;
     

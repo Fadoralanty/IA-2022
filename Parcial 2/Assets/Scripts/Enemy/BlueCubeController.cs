@@ -94,9 +94,10 @@ public class BlueCubeController : MonoBehaviour
         QuestionNode isIdle = new QuestionNode(IsIdle, wander, idle);
         QuestionNode isFleeing = new QuestionNode(IsFleeing, goToSafeSpot, isIdle);
         QuestionNode inSight = new QuestionNode(InSight, flee, isFleeing);
+        QuestionNode wasDamaged = new QuestionNode(WasDamaged, goToSafeSpot, inSight);
         
 
-        _root = inSight;
+        _root = wasDamaged;
     }
 
     bool IsFleeing()
@@ -111,6 +112,10 @@ public class BlueCubeController : MonoBehaviour
     {
         return _blueCubeModel.LineOfSight(target);
     }  
+    bool WasDamaged()
+    {
+        return _damageable.WasDamaged;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

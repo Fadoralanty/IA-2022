@@ -3857,7 +3857,12 @@ MonoBehaviour:
   PlayerWasSeen: 0
   PlayerlastSeenPosition: {x: 0, y: 0, z: 0}
   enemies: []
-  SafeSpots: []
+  SafeSpots:
+  - {fileID: 1558365491}
+  - {fileID: 355421416}
+  - {fileID: 107608123}
+  - {fileID: 1523159319}
+  - {fileID: 1630905165}
 --- !u!4 &1294385177
 Transform:
   m_ObjectHideFlags: 0
