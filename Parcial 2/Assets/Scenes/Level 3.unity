@@ -178,10 +178,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedCube (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 5414637441794715551, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
-      propertyPath: obsMask.m_Bits
-      value: 3072
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
 --- !u!1001 &123521348
@@ -1608,6 +1604,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedCube (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5414637441794715551, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
+      propertyPath: pathMask.m_Bits
+      value: 7168
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677fd826c47a09b46bd67023c7285040, type: 3}
 --- !u!1001 &917026232
@@ -2538,9 +2538,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1256973816}
   - component: {fileID: 1256973815}
-  - component: {fileID: 1256973814}
   - component: {fileID: 1256973813}
   - component: {fileID: 1256973812}
+  - component: {fileID: 1256973819}
+  - component: {fileID: 1256973818}
+  - component: {fileID: 1256973817}
+  - component: {fileID: 1256973814}
   m_Layer: 10
   m_Name: outer Walls
   m_TagString: Untagged
@@ -2597,8 +2600,8 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256973811}
   m_Mesh: {fileID: 961118704}
---- !u!64 &1256973814
-MeshCollider:
+--- !u!65 &1256973814
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2607,10 +2610,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 961118704}
+  serializedVersion: 2
+  m_Size: {x: 2.733414, y: 9.178792, z: 51.11728}
+  m_Center: {x: 1, y: 4.588396, z: 23.56}
 --- !u!114 &1256973815
 MonoBehaviour:
   m_ObjectHideFlags: 16
@@ -3543,6 +3545,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1256973817
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256973811}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.733414, y: 9.178792, z: 51.11728}
+  m_Center: {x: 49.42, y: 4.588396, z: 23.56}
+--- !u!65 &1256973818
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256973811}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 51.117275, y: 9.178792, z: 2.7334137}
+  m_Center: {x: 27.775606, y: 4.588396, z: -1.6}
+--- !u!65 &1256973819
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256973811}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 51.117275, y: 9.178792, z: 2.7334137}
+  m_Center: {x: 27.775606, y: 4.588396, z: 47.79293}
 --- !u!1 &1294385175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3844,7 +3885,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1574738656}
   - component: {fileID: 1574738655}
-  - component: {fileID: 1574738654}
   - component: {fileID: 1574738653}
   - component: {fileID: 1574738652}
   - component: {fileID: 1574738657}
@@ -3903,20 +3943,6 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574738651}
-  m_Mesh: {fileID: 1913903089}
---- !u!64 &1574738654
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574738651}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
   m_Mesh: {fileID: 1913903089}
 --- !u!114 &1574738655
 MonoBehaviour:
@@ -4676,7 +4702,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
