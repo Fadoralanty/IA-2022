@@ -9,6 +9,10 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene("Level 1");
+    }    
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     private void Start()
@@ -18,6 +22,7 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene("Level 1"); ;
+        if (Input.GetKeyDown(KeyCode.Return)) SceneManager.LoadScene("Level 1"); 
     }
+    
 }
