@@ -3653,7 +3653,7 @@ MonoBehaviour:
   currentScore: 0
   scoreMultiplier: 1
   currentGameTime: 0
-  MaxLevelGameTime: 45
+  MaxLevelGameTime: 60
   OnLevelReset:
     m_PersistentCalls:
       m_Calls: []

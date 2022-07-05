@@ -7,6 +7,7 @@ public class SafeSpot : MonoBehaviour
 {
     private void Start()
     {
-        EnemyManager.instance.SafeSpots.Add(transform);
+        if(EnemyManager.instance.SafeSpots.Count == 0)
+            EnemyManager.instance.SafeSpots.Add(transform);
     }
 }
